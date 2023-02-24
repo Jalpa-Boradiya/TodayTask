@@ -10,5 +10,17 @@ export const Service = {
                 error(err)
             });
 
+    },
+    post: (params, success, error) => {
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': 'JWT fefege...'
+        }
+        axios.post("https://maps.googleapis.com/maps/api/place/search/json", params,
+            { headers: headers }).then((response) => {
+                return success(response.data)
+            }).catch((err) => {
+                return error(err)
+            });
     }
 }
