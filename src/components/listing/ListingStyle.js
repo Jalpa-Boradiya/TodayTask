@@ -46,6 +46,7 @@ const Style = StyleSheet.create({
     label: {
         fontSize: AppUtil.getHP(1.8),
         color: 'black',
+        fontWeight:'600'
     },
     endCal: {
         flexDirection: 'row',

@@ -17,17 +17,17 @@ const Listing = ({ item, setDelete }) => {
     const [isItem, setItem] = useState({})
     const date = (props) => {
         if (Date.parse(props.date) - Date.parse(new Date()) < 0) {
-            return 'Pending'
+           return <Text style={[Style.label,{color : '#c1d11f'}]}>{'Pending'}</Text>
         }
         else {
-            return 'Completed'
+            return <Text style={[Style.label,{color : '#00610e'}]}>{'Completed'}</Text>
         }
     }
 
     const onAction = (data) => {
         setDelete(true)
         setCheckedOne(!isCheckedOne)
-        dispatch(removeSelected({ id: data.id ,complete:!isCheckedOne}))
+        dispatch(removeSelected({ id: data.id, complete: !isCheckedOne }))
     }
 
     const dispatch = useDispatch()
@@ -59,7 +59,8 @@ const Listing = ({ item, setDelete }) => {
                 <Text style={Style.label}>{item.date}</Text>
             </View>
             <View style={Style.endCal}>
-                <Text style={Style.label}>{date(item)}</Text>
+                {/* <Text style={Style.label}>{date(item)}</Text> */}
+                {date(item)}
                 <TouchableOpacity onPress={() => setModal(!isModal)}>
                     <IcnMore height={AppUtil.getHP(2.5)} width={AppUtil.getHP(2.5)} />
                 </TouchableOpacity>

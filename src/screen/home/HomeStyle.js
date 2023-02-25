@@ -9,6 +9,15 @@ const Style = StyleSheet.create({
         flex:1,width:'100%',
         marginTop:AppUtil.getHP(3),
     },
+    noData : {
+        flex:1,
+        justifyContent:'center'
+    },
+    noDataTxt : {
+        fontSize: AppUtil.getHP(2),
+        fontWeight: 'bold',
+        color : 'black'
+    },
     mainView: {
         width: "100%",
         flex:1,

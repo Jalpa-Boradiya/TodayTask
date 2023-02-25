@@ -14,6 +14,7 @@ const initialState = [
         date: '07/02/2023',
         complete: false
     },
+    
 ]
 
 const counterSlice = createSlice({

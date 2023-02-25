@@ -18,6 +18,7 @@ const Home = (props) => {
 
     const onDelete = () => {
         dispatch(deleteSelected())
+        setDelete(!isDelete)
     }
    
     const renderItem = ({ item }) => {
@@ -35,13 +36,20 @@ const Home = (props) => {
                         <Text style={Style.plusBtnTxt}>{isDelete ? 'Delete' : '+'}</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={Style.listing}>
-                    <FlatList
-                        data={data.storeToList}
-                        renderItem={renderItem}
-                    // keyExtractor={item => item.id}
-                    />
-                </View>
+               {
+                data.storeToList.length > 0
+               ?
+               <View style={Style.listing}>
+               <FlatList
+                   data={data.storeToList}
+                   renderItem={renderItem}
+               // keyExtractor={item => item.id}
+               />
+           </View> : 
+           <View style={Style.noData}>
+            <Text style={Style.noDataTxt}>No data found</Text>
+           </View>
+               }
             </View>
             {isModal && <AddTask isModal={isModal} setModal={setModal} />}
         </SafeAreaView>
