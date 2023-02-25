@@ -5,12 +5,14 @@ const initialState = [
     {
         id: '2',
         task: 'task my',
-        date: '01/02/2023'
+        date: '01/02/2023',
+        complete: false
     },
     {
         id: '5',
         task: 'test 1',
-        date: '07/02/2023'
+        date: '07/02/2023',
+        complete: false
     },
 ]
 
@@ -22,7 +24,8 @@ const counterSlice = createSlice({
             return [...state, {
                 id: action.payload.id,
                 task: action.payload.task,
-                date: action.payload.date
+                date: action.payload.date,
+                complete: action.payload.complete
             }]
         },
         removeFromList: (state, action) => {
@@ -33,16 +36,29 @@ const counterSlice = createSlice({
             return [...state, {
                 id: action.payload.id,
                 task: action.payload.task,
-                date: action.payload.date
+                date: action.payload.date,
+                complete: false
             }]
         },
         removeSelected: (state, action) => {
-            console.log(action);
+            const newTodos = [...state]
+            newTodos.forEach((todo, index) => {
+                if (todo.id === action.payload.id) {
+                    todo.complete = action.payload.complete
+                }
+            })
+            state = newTodos
+
+        },
+        deleteSelected: (state, action) => {
+
+            const data = state.filter(todo => todo.complete === false)
+            return data
+
 
         },
         updateItem: (state, action) => {
             const newTodos = [...state]
-            console.log('action of', action);
             newTodos.forEach((todo, index) => {
                 if (todo.id === action.payload.id) {
                     todo.task = action.payload.task
@@ -54,5 +70,5 @@ const counterSlice = createSlice({
 
 })
 
-export const { addToList, removeFromList, duplicateItem, updateItem, removeSelected } = counterSlice.actions
+export const { addToList, removeFromList, deleteSelected, duplicateItem, updateItem, removeSelected } = counterSlice.actions
 export default counterSlice.reducer

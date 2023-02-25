@@ -7,11 +7,11 @@ import IcnMore from '../../asset/svg/IcnMore'
 import Option from '../option/Option';
 import AddTask from '../addtask/AddTask';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateItem } from '../../redux/Slice';
+import { removeSelected, updateItem } from '../../redux/Slice';
 
 
-const Listing = ({ item, onData, setDelete }) => {
-    const [isCheckedOne, setCheckedOne] = useState(false);
+const Listing = ({ item, setDelete }) => {
+    const [isCheckedOne, setCheckedOne] = useState(item.complete);
     const [isModal, setModal] = useState(false)
     const [isOpen, setOpen] = useState(false)
     const [isItem, setItem] = useState({})
@@ -27,9 +27,9 @@ const Listing = ({ item, onData, setDelete }) => {
     const onAction = (data) => {
         setDelete(true)
         setCheckedOne(!isCheckedOne)
-        onData(data)
+        dispatch(removeSelected({ id: data.id ,complete:!isCheckedOne}))
     }
-    const state = useSelector((state) => state)
+
     const dispatch = useDispatch()
     const handleEditTodos = (editvalue) => {
         dispatch(updateItem(editvalue))

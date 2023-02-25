@@ -5,32 +5,27 @@ import AddTask from '../../components/addtask/AddTask'
 import { useDispatch, useSelector } from 'react-redux'
 import Listing from '../../components/listing/Listing'
 import Option from '../../components/option/Option'
-import { removeSelected } from '../../redux/Slice'
+import { deleteSelected } from '../../redux/Slice'
 
 
 const Home = (props) => {
+    const data = useSelector(state => state)
     const [isModal, setModal] = useState(false)
     const [isDelete, setDelete] = useState(false)
-    const [delData, setDelData] = useState([])
     const dispatch = useDispatch()
 
-    const data = useSelector(state => state)
 
-    const getIds = (item) => {
-        const data = []
-        data.push(...delData,item)
-        setDelData(data)
-    }
+
     const onDelete = () => {
-        dispatch(removeSelected(delData))
+        dispatch(deleteSelected())
     }
+   
     const renderItem = ({ item }) => {
         return (
-            <Listing item={item} setDelete={setDelete} onData={(detail) => getIds(detail)} />
+            <Listing item={item} setDelete={setDelete} />
         )
     }
 
-console.log('update data',data.storeToList);
     return (
         <SafeAreaView style={Style.container}>
             <View style={Style.mainView}>
@@ -44,7 +39,7 @@ console.log('update data',data.storeToList);
                     <FlatList
                         data={data.storeToList}
                         renderItem={renderItem}
-                        // keyExtractor={item => item.id}
+                    // keyExtractor={item => item.id}
                     />
                 </View>
             </View>
