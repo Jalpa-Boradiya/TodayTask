@@ -38,8 +38,18 @@ const counterSlice = createSlice({
         },
         removeSelected: (state, action) => {
             console.log(action);
-            
+
         },
+        updateItem: (state, action) => {
+            const newTodos = [...state]
+            console.log('action of', action);
+            newTodos.forEach((todo, index) => {
+                if (todo.id === action.payload.id) {
+                    todo.task = action.payload.task
+                }
+            })
+            state = newTodos
+        }
     }
 
 })

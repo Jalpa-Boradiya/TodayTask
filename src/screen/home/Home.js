@@ -30,7 +30,7 @@ const Home = (props) => {
         )
     }
 
-
+console.log('update data',data.storeToList);
     return (
         <SafeAreaView style={Style.container}>
             <View style={Style.mainView}>
@@ -44,7 +44,7 @@ const Home = (props) => {
                     <FlatList
                         data={data.storeToList}
                         renderItem={renderItem}
-                        keyExtractor={item => item.id}
+                        // keyExtractor={item => item.id}
                     />
                 </View>
             </View>

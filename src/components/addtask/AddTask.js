@@ -5,11 +5,11 @@ import IcnDate from '../../asset/svg/IcnDate'
 import IcnClose from '../../asset/svg/IcnClose'
 import DatePicker from 'react-native-date-picker';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToList } from '../../redux/Slice';
+import { addToList,updateItem } from '../../redux/Slice';
 import moment from 'moment';
 
 const AddTask = (props) => {
-    const { isModal, setModal } = props
+    const { isModal, setModal,handleEditTodos } = props
     const [task, setTask] = useState('')
     const [date, setDate] = useState(new Date())
     const [open, setOpen] = useState(false)
@@ -21,13 +21,11 @@ const AddTask = (props) => {
         setTask('')
         setModal(false)
     }
-    const data = props?.item
+    
     useEffect(() => {
         props.item && setTask(props.item?.task)
     }, [])
-    const updateItem = () => {
 
-    }
     return (
         <View style={styles.centeredView}>
             <Modal
@@ -53,7 +51,7 @@ const AddTask = (props) => {
                             </TouchableOpacity>
                             <Text style={styles.dateTxt}>Select Due Date</Text>
                         </View>
-                        <TouchableOpacity style={styles.addBtn} onPress={() => props.item ? updateItem() : addItem()}>
+                        <TouchableOpacity style={styles.addBtn} onPress={() => props?.item ? handleEditTodos({task,id : props.item.id}) : addItem()}>
                             <Text style={styles.addBtnTxt}>{props.item ? 'UPDATE' : 'ADD'}</Text>
                         </TouchableOpacity>
                     </View>

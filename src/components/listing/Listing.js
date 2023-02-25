@@ -6,9 +6,11 @@ import IcnSelect from '../../asset/svg/IcnSelect'
 import IcnMore from '../../asset/svg/IcnMore'
 import Option from '../option/Option';
 import AddTask from '../addtask/AddTask';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateItem } from '../../redux/Slice';
 
 
-const Listing = ({ item,onData,setDelete }) => {
+const Listing = ({ item, onData, setDelete }) => {
     const [isCheckedOne, setCheckedOne] = useState(false);
     const [isModal, setModal] = useState(false)
     const [isOpen, setOpen] = useState(false)
@@ -21,12 +23,20 @@ const Listing = ({ item,onData,setDelete }) => {
             return 'Completed'
         }
     }
-    console.log(isCheckedOne);
+
     const onAction = (data) => {
         setDelete(true)
         setCheckedOne(!isCheckedOne)
         onData(data)
     }
+    const state = useSelector((state) => state)
+    const dispatch = useDispatch()
+    const handleEditTodos = (editvalue) => {
+        dispatch(updateItem(editvalue))
+        setOpen(!isOpen)
+        setModal(!isModal)
+    }
+
     return (
         <View style={Style.listing}>
             <View style={Style.clickArea}>
@@ -57,7 +67,7 @@ const Listing = ({ item,onData,setDelete }) => {
             {isModal && <Option isModal={isModal} setModal={setModal} item={item}
                 setItem={(data) => setItem(data)}
                 setEdit={setOpen} />}
-            {isOpen && <AddTask item={isItem} setModal={setOpen} isModal={isModal} />}
+            {isOpen && <AddTask item={isItem} setModal={setOpen} handleEditTodos={handleEditTodos} isModal={isModal} />}
         </View>
     )
 }
