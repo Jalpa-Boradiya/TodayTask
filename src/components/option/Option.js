@@ -8,6 +8,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToList, removeFromList, duplicateItem } from '../../redux/Slice';
 import moment from 'moment';
 import AddTask from '../addtask/AddTask';
+import IcnEdit from '../../asset/svg/IcnEdit'
+import IcnDelete from '../../asset/svg/IcnDelete'
+import IcnDuplicate from '../../asset/svg/IcnDuplicate'
+import { AppUtil } from '../../util/AppUtil';
 
 const Option = (props) => {
     const { isModal, setModal, item, setEdit,setItem } = props
@@ -37,13 +41,16 @@ const Option = (props) => {
                     <View style={styles.modalView}>
                         <TouchableOpacity onPress={() => setModal(!isModal)} style={styles.closeIcn}><IcnClose /></TouchableOpacity>
                         <View style={styles.hline} />
-                        <TouchableOpacity onPress={() => editItem(item) }>
+                        <TouchableOpacity onPress={() => editItem(item) } style={styles.calIcon}>
+                            <IcnEdit height={AppUtil.getHP(2.5)} width={AppUtil.getHP(2.5)}/>
                             <Text style={styles.modalText}>Edit Task</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => addDuplicate(item)}>
+                        <TouchableOpacity onPress={() => addDuplicate(item)} style={styles.calIcon}>
+                        <IcnDuplicate height={AppUtil.getHP(2.5)} width={AppUtil.getHP(2.5)}/>
                             <Text style={styles.modalText}>Duplicate Task</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity onPress={() => dispatch(removeFromList(item.id))}>
+                        <TouchableOpacity onPress={() => dispatch(removeFromList(item.id))} style={styles.calIcon}>
+                        <IcnDelete height={AppUtil.getHP(2.5)} width={AppUtil.getHP(2.5)}/>
                             <Text style={styles.modalText}>Remove Task</Text>
                         </TouchableOpacity>
 

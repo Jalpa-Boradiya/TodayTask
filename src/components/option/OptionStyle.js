@@ -11,6 +11,16 @@ const styles = StyleSheet.create({
         bottom: 0,
         flex: 1
     },
+    calIcon : {
+        flexDirection:'row',
+        alignItems:'center',
+        borderBottomWidth:1,
+        borderBottomColor:'grey',
+        paddingBottom:AppUtil.getHP(0.5),
+        marginHorizontal:AppUtil.getHP(2),
+        paddingHorizontal:AppUtil.getHP(1),
+        marginBottom:AppUtil.getHP(2),
+    },
     hline : {
         width:'100%',
         height:AppUtil.getHP(1),
@@ -63,16 +73,11 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     modalText: {
-        marginBottom: 15,
         textAlign: 'left',
         fontWeight: 'bold',
         fontSize: AppUtil.getHP(2),
         color: 'black',
-        marginStart:AppUtil.getHP(2),
-        marginRight:AppUtil.getHP(2),
-        borderBottomWidth:1,
-        borderBottomColor:'grey',
-        paddingBottom:AppUtil.getHP(0.5),
+        marginStart:AppUtil.getHP(1),
     
     },
     subView: {

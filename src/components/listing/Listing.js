@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { removeSelected, updateItem } from '../../redux/Slice';
 
 
-const Listing = ({ item, setDelete }) => {
+const Listing = ({ item, setDelete,isDelete }) => {
     const [isCheckedOne, setCheckedOne] = useState(item.complete);
     const [isModal, setModal] = useState(false)
     const [isOpen, setOpen] = useState(false)
@@ -25,7 +25,7 @@ const Listing = ({ item, setDelete }) => {
     }
 
     const onAction = (data) => {
-        setDelete(true)
+        setDelete(!isDelete)
         setCheckedOne(!isCheckedOne)
         dispatch(removeSelected({ id: data.id, complete: !isCheckedOne }))
     }
